@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/* CSS Document */
+
+@media screen and (max-width: 1000px) {
+
+	p, li, a {
+		font-size: 18px;
+		line-height: 24px;
+	}
+	
+	th {
+		font-size: 15px;
+		line-height: 18px;
+	}
+	
+	td {
+		font-size: 12px;
+		line-height: 14px;
+	}
+	
+}

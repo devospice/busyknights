@@ -1,0 +1,166 @@
+@charset "UTF-8";
+/* CSS Document */
+
+@media screen and (max-width: 640px) {
+
+p, li, a {
+	font-size: 5vw;
+	line-height: 6.5vw;
+}
+
+	a.button {
+		font-size: 7vw;
+		line-height: 10vw;
+		min-width: 50vw;
+	}
+	
+h1 {
+	font-size: 5vw;
+	line-height: 15vw;
+	margin-left: 5vw;
+}
+	
+h2 {
+	font-size: 8vw;
+	line-height: 10vw;
+}
+
+.left-half, .right-half {
+	display: block;
+	width: auto;
+	float: none;
+	padding: 5vw;
+	margin: 0;
+}
+
+form {
+	padding: 5vw;
+	margin-bottom: 5vw;
+}
+
+input[type=text], input[type=email], input[type=password] {
+	font-size: 5vw;
+	line-height: 6.5vw;
+	margin-bottom: 4vw;
+}
+	input[type=submit] {
+		font-size: 7vw;
+		line-height: 10vw;
+		min-width: 50vw;
+	}
+
+label {
+	font-size: 4.5vw;
+	line-height: 6vw;
+}
+
+/* ----------========== SPLASH PAGE ==========---------- */
+#splash-container {
+	padding: 5vw 0;
+	margin-bottom: 10vw;
+}
+
+#busy-knights-logo {
+	display: none;
+}
+
+#busy-knights-logo-mobile {
+	display: block;
+	width: 90%;
+	margin: 5%;
+}
+
+/* ----------========== MAIN STRUCTURE ==========---------- */
+#content-container {
+	display: block;
+}
+
+aside {
+	display: none;
+}
+
+#content-area {
+	padding: 3vw;
+}
+
+form#search {
+	float: none;
+	padding: 0;
+	width: auto;
+}
+
+form#search input[type=text] {
+	width: 67vw;
+	font-size: 5vw;
+	line-height: 6.5vw;
+	margin-right: 1.75vw;
+}
+
+form#search input[type=submit] {
+	font-size: 5vw;
+	line-height: 6.5vw;
+	padding: 1.75vw 3vw;
+}
+
+
+/* ----------========== HEADER ==========---------- */
+header {
+	height: 15vw;
+	background-color: #034625; /* dark green */
+	border-bottom: 2px solid black;
+}
+
+#company-logo {
+	width: 15vw;
+	height: 15vw;
+}
+
+#admin-link {
+	display: none;
+}
+
+/* ----------========== FOOTER ==========---------- */
+footer {
+	padding: 5vw 0 2vw;
+	height: auto;
+}
+
+#footer-logo {
+	width: auto;
+	float: none;
+	margin: 0;
+}
+	
+footer p, footer a {
+	font-size: 3.25vw;
+	line-height: 4.5vw;
+	margin: 3vw;
+}
+
+footer a {
+	margin: 0;
+}
+
+footer span.links {
+	display: block;
+}
+
+
+/* ----------========== TABLES ==========---------- */
+th, td {
+	font-size: 4vw;
+	line-height: 5.5vw;
+	padding: 1.5vw;
+}
+
+	td.a {
+		font-size: 5vw;
+		line-height: 5.5vw;
+	}
+
+/* ----------========== FINAL OVERRIDES ==========---------- */
+.mobile-hide {
+	display: none;
+}
+	
+}
