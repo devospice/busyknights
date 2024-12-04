@@ -45,7 +45,8 @@
 			$_SESSION["accountsTable"],
 			$_SESSION["accountsTable"]);
 	//echo $liabialitySQL . "<br>";
-	$accounts = getDataFromTable($liabialitySQL, $cdb);
+	// $accounts = getDataFromTable($liabialitySQL, $cdb);
+	$accounts = yeildDataFromTable($liabialitySQL, $cdb);
 
 	// Loop through each account
 	foreach ($accounts as $account) {
@@ -62,37 +63,39 @@
 			$mail->ClearAllRecipients(); // clear all previous emails so they don't just keep adding them
 		
 			$toEmail = $account["email"];
-			$mail->AddAddress($toEmail);
+		
+			if ($toEmail != "") {
+				$mail->AddAddress($toEmail);
 
-			// Set up email
-			// $subject = "FIDIM Interactive, LLC Statement - " . $endDate;
-			$mail->Subject = "FIDIM Interactive, LLC Statement - " . $endDate;
-			
-			// Include text of email
-			$mail->Body = "<html>
-				<head></head><body>";
-			$mail->Body .= $emailText;
-			$mail->Body .= "<br><br>";
+				// Set up email
+				// $subject = "FIDIM Interactive, LLC Statement - " . $endDate;
+				$mail->Subject = "FIDIM Interactive, LLC Statement - " . $endDate;
 
-			// Include report
-			ob_start();
-			include("includes/framework/code-snippets/report-html.php");
-			$mail->Body .= ob_get_clean();
+				// Include text of email
+				$mail->Body = "<html>
+					<head></head><body>";
+				$mail->Body .= $emailText;
+				$mail->Body .= "<br><br>";
 
-			$mail->Body .= "</body></html>";
+				// Include report
+				ob_start();
+				include("includes/framework/code-snippets/report-html.php");
+				$mail->Body .= ob_get_clean();
 
-			// Send the email
-			$mail->Send();
-			if ($toEmail == "") {
-				echo "No email address for " . $account["name"] . "<br>";				
+				$mail->Body .= "</body></html>";
+
+				// Send the email
+				$mail->Send();
+				echo "Email will be sent to " . $toEmail . " (" . $account["name"] . ")" . "<br>";
+				
 			} else {
-				echo "email will be sent to " . $toEmail . "<br>";				
+				echo "No email address found.  Contact missing for account " . $account["name"] . "<br>";
 			}
 
-			
 		// }
 		
 	}
+
 
 	
 ?>

@@ -23,6 +23,25 @@ function getDataFromTable($sql, $db = "") {
 }
 
 
+// Returns a generator object that yeilds the database results one row at a time
+function yeildDataFromTable ($sql, $db = "") {
+	
+	// global $GLOBAL;
+	if (!$db) {
+		$db = get_db();
+	}
+	
+	// echo $sql."<br>";
+	if ($result = $db->query($sql)) {
+		while ($row = $result->fetch_assoc()) {
+			yield $row;
+		} 
+	} else {
+		return $result;
+	}
+	
+}
+
 
 // Returns the specified data from the specified table for the given ID.
 function getData ($desiredData, $whichTable, $itemID) {
