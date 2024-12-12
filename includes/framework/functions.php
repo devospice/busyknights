@@ -31,7 +31,7 @@ function yeildDataFromTable ($sql, $db = "") {
 		$db = get_db();
 	}
 	
-	// echo $sql."<br>";
+	echo $sql."<br>";
 	if ($result = $db->query($sql)) {
 		while ($row = $result->fetch_assoc()) {
 			yield $row;

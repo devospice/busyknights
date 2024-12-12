@@ -30,7 +30,9 @@
 	$startDate = $cdb->real_escape_string($_POST["startdate"]);
 	$endDate = $cdb->real_escape_string($_POST["enddate"]);
 	$emailText = $cdb->real_escape_string($_POST["email_content"]);
-
+	$emailText = stripslashes($emailText);
+	$startBatch = $cdb->real_escape_string($_POST["startbatch"]);
+	$endBatch = $cdb->real_escape_string($_POST["endbatch"]);
 
 	// Get all liability accounts
 	$liabialitySQL = sprintf("
@@ -38,64 +40,61 @@
 		FROM %s 
 		LEFT JOIN account_type ON %s.type = account_type.id
 		LEFT JOIN contacts ON %s.contact = contacts.id
-		WHERE %s.type = '2'", 
+		WHERE %s.type = '2'
+		LIMIT %s,%s", 
 			$_SESSION["accountsTable"],
 			$_SESSION["accountsTable"],
 			$_SESSION["accountsTable"],
 			$_SESSION["accountsTable"],
-			$_SESSION["accountsTable"]);
-	//echo $liabialitySQL . "<br>";
-	// $accounts = getDataFromTable($liabialitySQL, $cdb);
-	$accounts = yeildDataFromTable($liabialitySQL, $cdb);
+			$_SESSION["accountsTable"],
+			$startBatch, $endBatch);
+	// echo $liabialitySQL . "<br>";
+	$accounts = getDataFromTable($liabialitySQL, $cdb);
+	/*$accounts = yeildDataFromTable($liabialitySQL, $cdb);*/
 
-	// Loop through each account
+	$counter = $startBatch;
+
 	foreach ($accounts as $account) {
+
+		// Get opening balance, closing balance, and transaction entries
+		include("includes/framework/code-snippets/account-open-close-transactions.php");
+
+		$mail->ClearAllRecipients(); // clear all previous emails so they don't just keep adding them
+
+		// Set recipient
+		$toEmail = $account["email"];
+		// $toEmail = "devospice@gmail.com"; // Send to me only for testing 
+
+		if ($toEmail != "") {
+			$mail->AddAddress($toEmail);
+
+			// Set up email
+			$mail->Subject = "FIDIM Interactive, LLC Statement - " . $endDate;
+
+			// Include text of email
+			$mail->Body = "<html>
+				<head></head><body>";
+			$mail->Body .= $emailText;
+			$mail->Body .= "<br><br>";
+
+			// Include report
+			ob_start();
+			include("includes/framework/code-snippets/report-html.php");
+			$mail->Body .= ob_get_clean();
+
+			$mail->Body .= "</body></html>";
+
+			// Send the email
+			$mail->Send();
+			echo $counter . ") Email will be sent to " . $toEmail . " (" . $account["name"] . ")" . "<br>";
+
+		} else {
+			echo $counter . ") No email address found.  Contact missing for account " . $account["name"] . "<br>";
+		}
 		
-		// if ($account["id"] == 50) { // Only do Devo's account
-		
-			// Get opening balance, closing balance, and transaction entries
-			include("includes/framework/code-snippets/account-open-close-transactions.php");
+		$counter++;
 
-			// Get contact email address
-			/*$contactSQL = sprintf("SELECT email FROM contacts WHERE id = '%s'", $account["contact"]);
-			$contacts = getDataFromTable($contactSQL, $cdb);
-			$toEmail = $contacts[0]["email"];*/
-			$mail->ClearAllRecipients(); // clear all previous emails so they don't just keep adding them
-		
-			$toEmail = $account["email"];
-		
-			if ($toEmail != "") {
-				$mail->AddAddress($toEmail);
-
-				// Set up email
-				// $subject = "FIDIM Interactive, LLC Statement - " . $endDate;
-				$mail->Subject = "FIDIM Interactive, LLC Statement - " . $endDate;
-
-				// Include text of email
-				$mail->Body = "<html>
-					<head></head><body>";
-				$mail->Body .= $emailText;
-				$mail->Body .= "<br><br>";
-
-				// Include report
-				ob_start();
-				include("includes/framework/code-snippets/report-html.php");
-				$mail->Body .= ob_get_clean();
-
-				$mail->Body .= "</body></html>";
-
-				// Send the email
-				$mail->Send();
-				echo "Email will be sent to " . $toEmail . " (" . $account["name"] . ")" . "<br>";
-				
-			} else {
-				echo "No email address found.  Contact missing for account " . $account["name"] . "<br>";
-			}
-
-		// }
-		
 	}
-
 
 	
 ?>
