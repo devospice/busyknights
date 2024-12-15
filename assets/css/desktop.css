@@ -701,8 +701,8 @@ tr.details td {
 	}
 
 aside {
-	width: 225px;
-	min-width: 225px;
+	width: 250px;
+	min-width: 250px;
 	background-color: #d1d3d4; /* light grey */
 }
 
@@ -742,13 +742,29 @@ nav {
 	margin: 20px 0;
 }
 
-
 nav a.button {
 	display: block;
 	min-width: auto;
 	margin: 10px;
 	font-size: 18px;
 	line-height: 20px;
+}
+
+nav .sub-account {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 10px;
+}
+
+nav .sub-account div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+nav .sub-account p, nav .sub-account a {
+	font-size: 14px;
+	line-height: 19px;
+	white-space: nowrap;
 }
 
 div.section-nav {
@@ -803,7 +819,7 @@ header {
 }
 
 #company-logo {
-	width: 225px;
+	width: 250px;
 	height: 100px;
 	background-color: white;
 	display: inline-block;

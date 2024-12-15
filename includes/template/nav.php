@@ -4,6 +4,33 @@
             	<a href="/artists" class="button" id="nav-artists">Artists</a>
             	<a href="/companies" class="button" id="nav-companies">Companies</a>
             	<a href="/accounts" class="button" id="nav-accounts">Accounts</a>
+				
+				<?php
+					foreach ($featuredAccounts as $feature) {
+						$startDate = sprintf("%s-01-01", $_SESSION["activeYear"]);
+						if ($_SESSION["activeYear"] == date("Y")) {
+							// This year, stop today
+							$endDate = sprintf("%s-%s-%s", $_SESSION["activeYear"], date("m"), date("d"));
+						} else {
+							// Prior year, stop on 12/31
+							$endDate = sprintf("%s-12-31", $_SESSION["activeYear"]);
+						}
+						$balanceSQL = getBalanceSQL("debit", "credit", $startDate, $endDate, $feature["id"]);
+						$balances = getDataFromTable($balanceSQL, $cdb);
+						$balance = $balances[0]["balance"];
+						if (!$balance) {
+							$balance = "0.00";
+						}
+						
+						echo "<div class=\"sub-account\">";
+							printf("<div><a href=\"/accounts/view/%s\">%s</a></div><p>$%s</p>", $feature["id"], $feature["name"], $balance);
+						echo "</div>";
+					}
+				?>
+				
+					
+				
+				
                 <hr>
             	<a href="/transactions" class="button" id="nav-companies">Transactions</a>
             	<a href="/transactions/add" class="button" id="nav-companies">New Transaction</a>
