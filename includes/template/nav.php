@@ -15,15 +15,15 @@
 							// Prior year, stop on 12/31
 							$endDate = sprintf("%s-12-31", $_SESSION["activeYear"]);
 						}
-						$balanceSQL = getBalanceSQL("debit", "credit", $startDate, $endDate, $feature["id"]);
-						$balances = getDataFromTable($balanceSQL, $cdb);
-						$balance = $balances[0]["balance"];
-						if (!$balance) {
-							$balance = "0.00";
+						$accountBalanceSQL = getBalanceSQL("debit", "credit", $startDate, $endDate, $feature["id"]);
+						$accountBalances = getDataFromTable($accountBalanceSQL, $cdb);
+						$accountBalance = $accountBalances[0]["balance"];
+						if (!$accountBalance) {
+							$accountBalance = "0.00";
 						}
 						
 						echo "<div class=\"sub-account\">";
-							printf("<div><a href=\"/accounts/view/%s\">%s</a></div><p>$%s</p>", $feature["id"], $feature["name"], $balance);
+							printf("<div><a href=\"/accounts/view/%s\">%s</a></div><p>$%s</p>", $feature["id"], $feature["name"], $accountBalance);
 						echo "</div>";
 					}
 				?>

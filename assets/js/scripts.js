@@ -61,6 +61,18 @@ function toggleDivs () {
 	
 }
 
+function showAccountInfo (divId) {
+	
+	var div = document.getElementById(divId);
+	if (div) {
+		div.classList.toggle("active");
+	} else {
+		console.log("Error: Unable to find div " . divId);
+	}
+	
+}
+
+
 function deleteTransaction (entryID) {
 
 	var formData = new FormData();	

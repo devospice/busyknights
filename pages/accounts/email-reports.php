@@ -32,7 +32,7 @@
 	$emailText = $cdb->real_escape_string($_POST["email_content"]);
 	$emailText = stripslashes($emailText);
 	$startBatch = $cdb->real_escape_string($_POST["startbatch"]);
-	$endBatch = $cdb->real_escape_string($_POST["endbatch"]);
+	$endBatch = 50;
 
 	// Get all liability accounts
 	$liabialitySQL = sprintf("
