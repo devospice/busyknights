@@ -5,7 +5,7 @@
 					<th class="thirty">Notes</th>
 					<th class="six debit">Debit</th>
                 	<th class="six credit">Credit</th>
-                	<!--<th class="six">Net</th>-->
+                	<th class="six cleared">Cleared</th>
                 	<th class="six info">View</th>
                 	<th class="six edit">Edit</th>
                 	<th class="six edit">Delete</th>
@@ -129,6 +129,14 @@
 								echo "<td class=\"credit\"></td>";
 							}
 
+							$clearClass = "";
+							$hasCleared = 0;
+							if ($entry["cleared"] == true) {
+								$clearClass = "hasCleared";
+								$hasCleared = 1;
+							}
+							printf("<td class=\"cleared %s\"><a href=\"javascript:clearTransaction('%s', '%s');\">&nbsp;</a></td>", $clearClass, $entry["transaction"], $hasCleared);
+							
 							printf("<td class=\"info\"><a href=\"/transactions/view/%s\">i</a></td>", $entry["transaction"]);
 							printf("<td class=\"edit\"><a href=\"/transactions/edit/%s\">&nbsp;</a></td>", $entry["transaction"]);
 							printf("<td class=\"delete\"><a href=\"javascript:deleteTransaction('%s');\" onClick=\"return confirm('WARNING: Deleting this transaction will delete all associated entries on this and other accounts.  Are you sure you want to proceed?');\">/</a></td>", $entry["transaction"]);

@@ -581,6 +581,11 @@ th {
 		padding-right: 15px;
 	}
 
+	td.cleared {
+		border-right: 1px solid #034625;
+		text-align: center;
+	}
+
 tr {
 	/*border-bottom: 1px solid #034625;*/ /* dark green */
 }
@@ -616,6 +621,33 @@ td, td a, td p {
 			background-color: white;
 			color: #034625; /* dark green */
 		}
+
+	td.cleared a {
+		display: inline-block;
+		box-sizing: border-box;
+		box-shadow: inset 0px 0px 0px 2px #034625;
+		color: #034625;
+		border-radius: 20px;
+		text-decoration: none;
+		width: 26px;
+		height: 26px;
+		line-height: 21px;
+		opacity: 0.25;
+		background-image: url(/assets/images/button-icons/check-green.svg);
+		background-position: center;
+		background-size: 55%;
+		background-repeat: no-repeat;
+	}
+
+	td.cleared.hasCleared a {
+		border: none;
+		box-shadow: none;
+		background-color: #034625; /* dark green */
+		background-image: url(/assets/images/button-icons/check.svg);
+		color: white;
+		font-weight: bold;
+		opacity: 1;
+	}
 	
 	td.edit a {
 		display: inline-block;

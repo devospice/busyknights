@@ -72,6 +72,38 @@ function showAccountInfo (divId) {
 	
 }
 
+function clearTransaction (transID, isCleared) {
+		
+	var formData = new FormData();	
+	formData.append('id', transID);
+	formData.append('cleared', isCleared);
+	
+	var fAJAX = create_ajax();
+	fAJAX.open("POST", "/ajax/clear-transaction", true);
+	fAJAX.send(formData);
+	
+	fAJAX.onreadystatechange = function (e) {
+		if (fAJAX.readyState == 4) {
+			
+			console.log(fAJAX.responseText);
+			// var response = JSON.parse(fAJAX.responseText);
+			
+			// Refresh page to update table
+			// location.reload();  // This causes any just-submitted forms to resubmit
+			
+			// This always redirects to the transactions page, which isn't always what we want.
+			// document.location = "/transactions?x=" + Date.now();
+			
+			// This should refresh the current page without resubmitting any forms
+			document.location = document.location.pathname + "/" + Date.now();
+			
+			// console.log(response.response);
+			
+		}
+	};
+	
+}
+
 
 function deleteTransaction (entryID) {
 
