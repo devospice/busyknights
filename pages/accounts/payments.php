@@ -100,10 +100,16 @@
 				<div>
 					<textarea name="email_content" placeholder="Email content"></textarea>
 				</div>
+				<div>
+					<label class="inline" for="startbatch">Batch start:</label>
+					<input type="number" name="startbatch" value="1">
+					<label class="inline" for="endbatch">Batch length:</label>
+					<input type="number" name="endbatch" value="50" disabled>
+				</div>
+				
 				<?php 
 					include("includes/template/forms/start-date-end-date.php");
 				?>
-				
 				<div class="right-half">
                 	<input type="submit" name="submit" value="Email Reports">
 				</div>

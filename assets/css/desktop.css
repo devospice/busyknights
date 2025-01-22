@@ -16,7 +16,7 @@ sup {
 
 #container {
 	width: 100%;
-	max-width: 1600px;
+	/*max-width: 1600px;*/
 	margin: 0 auto;
 	position: relative;
 	background-color: white;
@@ -30,8 +30,8 @@ sup {
 h1 {
 	margin: 0;
 	font-family: arial; /* Set to Avenir later */
-	font-size: 32px;
-	line-height: 100px;
+	font-size: 26px;
+	line-height: 65px;
 	color: white;
 	display: inline-block;
 	margin-left: 25px;
@@ -236,6 +236,21 @@ hr {
 	display: inline-block;
 	vertical-align: top;
 }
+
+.toggle-content {
+	display: none;
+	position: relative;
+}
+.toggle-content.active {
+	display: block;
+}
+
+.closebox {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
 
 div.callout {
 	padding: 10px;
@@ -561,6 +576,16 @@ th {
 		width: 80%;
 	}
 
+	th.credit, th.debit {
+		text-align: right;
+		padding-right: 15px;
+	}
+
+	td.cleared {
+		border-right: 1px solid #034625;
+		text-align: center;
+	}
+
 tr {
 	/*border-bottom: 1px solid #034625;*/ /* dark green */
 }
@@ -596,6 +621,33 @@ td, td a, td p {
 			background-color: white;
 			color: #034625; /* dark green */
 		}
+
+	td.cleared a {
+		display: inline-block;
+		box-sizing: border-box;
+		box-shadow: inset 0px 0px 0px 2px #034625;
+		color: #034625;
+		border-radius: 20px;
+		text-decoration: none;
+		width: 26px;
+		height: 26px;
+		line-height: 21px;
+		opacity: 0.25;
+		background-image: url(/assets/images/button-icons/check-green.svg);
+		background-position: center;
+		background-size: 55%;
+		background-repeat: no-repeat;
+	}
+
+	td.cleared.hasCleared a {
+		border: none;
+		box-shadow: none;
+		background-color: #034625; /* dark green */
+		background-image: url(/assets/images/button-icons/check.svg);
+		color: white;
+		font-weight: bold;
+		opacity: 1;
+	}
 	
 	td.edit a {
 		display: inline-block;
@@ -701,8 +753,8 @@ tr.details td {
 	}
 
 aside {
-	width: 225px;
-	min-width: 225px;
+	width: 250px;
+	min-width: 250px;
 	background-color: #d1d3d4; /* light grey */
 }
 
@@ -742,13 +794,29 @@ nav {
 	margin: 20px 0;
 }
 
-
 nav a.button {
 	display: block;
 	min-width: auto;
 	margin: 10px;
 	font-size: 18px;
 	line-height: 20px;
+}
+
+nav .sub-account {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 10px;
+}
+
+nav .sub-account div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+nav .sub-account p, nav .sub-account a {
+	font-size: 14px;
+	line-height: 19px;
+	white-space: nowrap;
 }
 
 div.section-nav {
@@ -765,7 +833,7 @@ div.section-nav {
 	div.section-nav a.button {
 		font-size: 16px;
 		line-height: 19px;
-		min-width: 150px;
+		min-width: auto;
 		padding: 3px 10px;
 		margin-right: 10px;
 		margin-bottom: 10px;
@@ -778,6 +846,7 @@ div.section-nav {
         width: calc(100% - 250px);
         padding: 20px 0;
         background-color: white;
+		z-index: 10;
     }
 
     div.section-nav.locked.active {
@@ -797,17 +866,24 @@ div.section-nav {
 
 /* ----------========== HEADER ==========---------- */
 header {
-	height: 100px;
+	height: 65px;
+	width: 100%;
 	background-color: #034625; /* dark green */
 	border-bottom: 2px solid black;
+	display: flex;
+	justify-content: space-between;
 }
 
 #company-logo {
-	width: 225px;
-	height: 100px;
+	width: 250px;
+	height: 65px;
 	background-color: white;
-	display: inline-block;
-	float: left;
+	
+	display: flex;
+	justify-content: center;
+	
+	/*display: inline-block;
+	float: left;*/
 	
 	/*background-image: url(/assets/images/logos/logo-FPO.png);
 	background-image: url(/assets/images/logos/fidim.jpg);*/
@@ -829,10 +905,12 @@ header {
 	}
 	
 	#company-logo img {
-		max-width: 80%;
+		/*max-width: 80%;
 		max-height: 80%;
 		display: block;
-		margin: 5% auto;
+		margin: 5% auto;*/
+		height: 80%;
+		margin: 10% auto;
 	}
 	
 	#company-logo label {
@@ -852,6 +930,15 @@ header {
 		border: 2px solid #034625; /* dark green */
 		padding: 3px;
 	}
+
+	#company-header {
+		display: flex;
+		justify-content: space-between
+	}
+
+	#company-header > div {
+		padding-right: 25px;
+	}
 	
 #admin-link, #logout-link {
 	font-size: 18px;
@@ -865,7 +952,7 @@ header {
 	min-width: 75px;
 	text-align: center;
 	float: right;
-	margin: 35px 25px 0 0;
+	margin: 18px 0px 0 25px;
 }
 
 a#home-link {

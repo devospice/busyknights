@@ -2,6 +2,9 @@
 
 	include("includes/common.php");
 
+	$featuredAccountSQL = sprintf("SELECT id, name FROM %s WHERE list_on_left = TRUE ORDER BY name", $_SESSION["accountsTable"]);
+	$featuredAccounts = getDataFromTable($featuredAccountSQL, $cdb);
+
 ?>
 <!doctype html>
 <html>

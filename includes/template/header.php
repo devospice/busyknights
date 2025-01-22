@@ -46,12 +46,16 @@
             	<a href="/"><img src="/assets/images/client_logos/<?php echo $_SESSION["company"]["logo"]; ?>"></a>
             <?php endif; ?>
         </div>
-    	<h1><?php printf($_SESSION["company"]["name"]); ?></h1>
-        
-        <?php if ($_SESSION["user"]["user_level"] == "1") { ?>
-        	<a href="/admin" id="admin-link">Admin</a>
-        <?php } ?>
-        
-        <a href="/logout" id="logout-link">Logout</a>
+		<div id="company-header">
+			<h1><?php printf($_SESSION["company"]["name"]); ?></h1>
+			
+			<div>
+				<?php if ($_SESSION["user"]["user_level"] == "1") { ?>
+					<a href="/admin" id="admin-link">Admin</a>
+				<?php } ?>
+
+				<a href="/logout" id="logout-link">Logout</a>
+			</div>
+		</div>
         
     </header>
