@@ -21,7 +21,7 @@
 	$mail->Port = "465";
 	$mail->isHTML();
 	$mail->Username = "fidiminteractive@gmail.com";
-	$mail->Password = "jybhenbljimwvwqo"; /* Must use the App Password feature from th Google Account "FIDIMn@t2!"; */
+	$mail->Password = "ytfdnhnexjcsoind"; /* Must use the App Password feature from the Google Account fidiminteractive@gmail.com */
 	$mail->SetFrom("support@fidim.com", "FIDIM Interactive, LLC");
 	$mail->addReplyTo("support@fidim.com", "FIDIM Interactive, LLC");
 	
