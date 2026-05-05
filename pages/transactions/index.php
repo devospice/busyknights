@@ -15,7 +15,7 @@
 	$msg = "";
 
 	// Transaction query defaults
-	$selectLimit = 15;
+	$selectLimit = 50;
 	$desc = "";
 
 	if (isset($_POST["submit"])) {
@@ -238,6 +238,8 @@
 							$royaltyTally -= $credit;
 						}
 						
+						// Need to subtract COGS from royaltyTally here
+						
 					} else {
 						$complete = true;
 					}
@@ -436,35 +438,6 @@
 
 					$counter = 1;
 
-					/* THIS IS NOT CORRECT AND IS NOT NEEDED. ONLY ASSIGN ROYALTIES BELOW.  
-					Also, Credit entry was being skipped for some reason. */
-					
-					/*$debitAccount = $_POST["account-1"];
-					$creditAccount = $_POST["account-2"];
-
-					$insertDebitSQL = sprintf("INSERT INTO %s (account, debit, credit, date, transaction, entry_num) VALUES ('%s', '%s', '0.00', '%s', '%s', '%s')", $_SESSION["entriesTable"], $debitAccount, $saleAmount, $date, $last_id, $counter);
-
-					$result = runSQL($insertDebitSQL, $cdb);
-					if ($result == true) {
-						$msg .= "Entry for ". $debitAccount ." created successfully.";
-					} else {
-						$errorCount++;
-						$errorMsg .= sprintf("<p class=\"alert\">There was an error creating the entry: %s</p>", $cdb->error);
-					}
-
-					$counter++;
-
-					$insertCreditSQL = sprintf("INSERT INTO entries (account, debit, credit, date, transaction, entry_num) VALUES ('%s', '0.00', '%s', '%s', '%s', '%s')", $creditAccount, $saleAmount, $date, $last_id, $counter);
-
-					$result = runSQL($insertCreditSQL, $cdb);
-					if ($result == true) {
-						$msg .= "Entry for ". $creditAccount ." created successfully.";
-					} else {
-						$errorCount++;
-						$errorMsg .= sprintf("<p class=\"alert\">There was an error creating the entry: %s</p>", $cdb->error);
-					}
-
-					$counter++;*/
 
 
 					// Tally royalty
@@ -507,20 +480,6 @@
 						$counter++;
 
 					}
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 					
 					
 				} else {

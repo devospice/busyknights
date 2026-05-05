@@ -59,9 +59,10 @@
 		<!--Footer-->
 		<tr>
 			<td colspan="2" width="650" style="padding: 20px 0;">
-				<p style="font-family: arial; font-size: 14px; line-height: 18px; color: black; margin: 0 0 18px; text-align: center;">Please pay within 30 days of the date indicated above.<br>
-					Make checks or money orders payable to "FIDIM Interactive, LLC."<br>
-					PayPal payments can be sent to "support@fidim.com."
+				<p style="font-family: arial; font-size: 14px; line-height: 18px; color: black; margin: 0 0 18px; text-align: center;">Payment is due upon receipt.<br>
+					Checks can be made payable to "FIDIM Interactive, LLC."<br>
+					PayPal, Venmo, or Zelle payments can be sent to Tom Rockwell at devospice@gmail.com.<br>
+					For Zelle verification, the last four digits of my cell are 2732.
 				</p>
 				<p style="font-family: arial; font-size: 14px; line-height: 18px; color: black; margin: 0; text-align: center; font-weight: bold;">Thank you for your business!
 				</p>

@@ -72,13 +72,21 @@
 
 	$mail->Body .= "</body></html>";
 
+
 	// Send the email
 	try {
-		$mail->Send();	
-		$returnArray = array(
-			"error" => false,
-			"message" => "<p>Email sent to " . $email . "</p>"
-		);
+		if ($sendTheEmail == true) {
+			$mail->Send();	
+			$returnArray = array(
+				"error" => false,
+				"message" => "<p>Email sent to " . $email . "</p>"
+			);
+		} else {
+			$returnArray = array(
+				"error" => false,
+				"message" => "<p>Email not sent to " . $email . " because balance is below $10.</p>"
+			);
+		}
 	} catch (Exception $e) {
 		$returnArray = array(
 			"error" => true,

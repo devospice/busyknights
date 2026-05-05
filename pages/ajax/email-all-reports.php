@@ -57,6 +57,7 @@ for (var i=0; i<accounts.length; i++) {
 	newFormData.append(email, thisAccount.email);
 	newFormData.append(email_content, thisAccount.emailText);
 	newFormData.append(accountId, thisAccount.accountId);
+	newFormData.append(sendBelowTen, false);
 
 	chAJAX.open("POST", "/ajax/email-report", false);
 	chAJAX.send(newFormData);
