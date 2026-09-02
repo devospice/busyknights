@@ -238,6 +238,8 @@
 							$royaltyTally -= $credit;
 						}
 						
+						// Need to subtract COGS from royaltyTally here
+						
 					} else {
 						$complete = true;
 					}

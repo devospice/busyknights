@@ -21,6 +21,7 @@
 						?>
 					</select>
                 </div>
+
             	<div class="left-half">
 					<label for="release_date">Release Date:</label>
                     <?php
@@ -37,6 +38,15 @@
                     <label for="opening_stock">Opening Stock Quantity:</label>
 					<input type="number" name="opening_stock" value="<?php if (isset($item)) { echo $item["opening_stock"]; } else { echo "0"; } ?>">
                 </div>
+
+				<div class="left-half">
+					<label for="cogs">Cost of individual item (physical only)</label>
+					<input type="number" name="cogs" placeholder="0.00" style="width: 60px;" value="<?php if (isset($item)) { echo $item["cogs"]; } else { echo "0.00"; } ?>"> 
+					<span style="color: red; font-weight: bold;">Note: Doesn't work yet.</span>
+				</div>
+				<div class="right-half">
+				</div>
+
             	<div class="left-half">
                     <label for="catalog_number">Catalog Number:</label>
                     <input type="text" name="catalog_number" value="<?php if (isset($item)) { echo $item["catalog_number"]; } ?>">
