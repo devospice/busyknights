@@ -33,6 +33,10 @@
 	$emailText = stripslashes($emailText);
 	$startBatch = $cdb->real_escape_string($_POST["startbatch"]);
 	$endBatch = 50;
+	/*$sendBelowTen = $cdb->real_escape_string($_POST["sendBelowTen"]) ?? true;  // If not set, default to true.
+	if ($sendBelowTen == "false") {
+		$sendBelowTen = false;
+	}*/
 
 	// Get all liability accounts
 	$liabialitySQL = sprintf("
@@ -64,32 +68,45 @@
 		// Set recipient
 		$toEmail = $account["email"];
 		// $toEmail = "devospice@gmail.com"; // Send to me only for testing 
+		
+		// See if we should send the email or if the balance is too low.
+		$sendTheEmail = true;
+		$balanceFloat = floatval(preg_replace('/[^0-9.-]/', '', $closingBalance));
+		if ($balanceFloat < 10) {
+			if ($account["send_below_ten"] == false) {
+				$sendTheEmail = false;
+			}
+		}
 
-		if ($toEmail != "") {
-			$mail->AddAddress($toEmail);
+		if ($sendTheEmail == true) {
+			if ($toEmail != "") {
+				$mail->AddAddress($toEmail);
 
-			// Set up email
-			$mail->Subject = "FIDIM Interactive, LLC Statement - " . $endDate;
+				// Set up email
+				$mail->Subject = "FIDIM Interactive, LLC Statement - " . $endDate;
 
-			// Include text of email
-			$mail->Body = "<html>
-				<head></head><body>";
-			$mail->Body .= $emailText;
-			$mail->Body .= "<br><br>";
+				// Include text of email
+				$mail->Body = "<html>
+					<head></head><body>";
+				$mail->Body .= $emailText;
+				$mail->Body .= "<br><br>";
 
-			// Include report
-			ob_start();
-			include("includes/framework/code-snippets/report-html.php");
-			$mail->Body .= ob_get_clean();
+				// Include report
+				ob_start();
+				include("includes/framework/code-snippets/report-html.php");
+				$mail->Body .= ob_get_clean();
 
-			$mail->Body .= "</body></html>";
+				$mail->Body .= "</body></html>";
 
-			// Send the email
-			$mail->Send();
-			echo $counter . ") Email will be sent to " . $toEmail . " (" . $account["name"] . ")" . "<br>";
+				// Send the email
+				$mail->Send();
+				echo $counter . ") <strong>Email will be sent to " . $toEmail . " (" . $account["name"] . ": " . $closingBalance . ")</strong><br>";
 
+			} else {
+				echo $counter . ") No email address found.  Contact missing for account " . $account["name"] . "<br>";
+			}
 		} else {
-			echo $counter . ") No email address found.  Contact missing for account " . $account["name"] . "<br>";
+			echo $counter . ") Email will not be sent to " . $toEmail . " (" . $account["name"] . ") because the balance is below $10 (" . $closingBalance . ")<br>";
 		}
 		
 		$counter++;

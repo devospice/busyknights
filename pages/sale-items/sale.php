@@ -34,7 +34,13 @@
 		$msg = "<p class=\"alert\">Error: No item found.</p>";
 	}*/
 	
-	$itemsSQL = "SELECT * FROM sale_items ORDER BY name";
+	$itemsSQL = "SELECT sale_items.*, artists.name as artistname
+				FROM 
+				sale_items 
+				LEFT JOIN artists
+				ON 
+				sale_items.artist = artists.id
+				ORDER BY sale_items.name;";
 	$items = getDataFromTable($itemsSQL, $cdb);
 		
 ?>
@@ -83,7 +89,7 @@
 										$selected = "selected";
 									}
 								}
-								printf("<option value=\"%s\" %s>%s</option>", $item["id"], $selected, $item["name"]);
+								printf("<option value=\"%s\" %s>%s by %s</option>", $item["id"], $selected, $item["name"], $item["artistname"]);
 							}
 						?>
 					</select>

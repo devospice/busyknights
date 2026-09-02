@@ -1,5 +1,13 @@
 <?php
 
+	// Category id for accounts that hold payment-processor fees tied to
+	// subscription revenue (PayPal, Stripe, Braintree). See account_category
+	// table -- id 25, "Subscription Processing Fees". Update this single
+	// value if that category id ever changes; do not hardcode account ids
+	// below, since a given processor's fee account has a different numeric
+	// id in every year's accounts_XX table.
+	$subscriptionFeeCategory = 25;
+
 /* --- PERIOD 1 --- */
 
 	$startDate = sprintf("%s-01-01", $_SESSION["activeYear"]);
@@ -29,13 +37,13 @@
 	// Get subscription fees
 	$p1SQL2a = sprintf("SELECT %s.*,
 		COALESCE(SUM(COALESCE(%s.debit,0) - COALESCE(%s.credit,0)),0) AS feetotal
-		FROM %s 
+		FROM %s
 		LEFT JOIN %s ON %s.transaction = %s.id
 		LEFT JOIN %s ON %s.account = %s.id
-		WHERE %s.id = 493 AND %s.date >= '%s' AND %s.date <= '%s'", 
+		WHERE %s.category = '%s' AND %s.date >= '%s' AND %s.date <= '%s'",
 					$_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"],
 					$_SESSION["accountsTable"], $_SESSION["entriesTable"], $_SESSION["accountsTable"],
-					$_SESSION["accountsTable"], $_SESSION["entriesTable"], 
+					$_SESSION["accountsTable"], $subscriptionFeeCategory, $_SESSION["entriesTable"],
 					$startDate, $_SESSION["entriesTable"], $endDate);
 	
 	$p1Subs2a = getDataFromTable($p1SQL2a, $cdb);
@@ -68,13 +76,13 @@
 	// Get subscription fees
 	$p2SQL2a = sprintf("SELECT %s.*,
 		COALESCE(SUM(COALESCE(%s.debit,0) - COALESCE(%s.credit,0)),0) AS feetotal
-		FROM %s 
+		FROM %s
 		LEFT JOIN %s ON %s.transaction = %s.id
 		LEFT JOIN %s ON %s.account = %s.id
-		WHERE %s.id = 493 AND %s.date >= '%s' AND %s.date <= '%s'", 
+		WHERE %s.category = '%s' AND %s.date >= '%s' AND %s.date <= '%s'",
 					$_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"],
 					$_SESSION["accountsTable"], $_SESSION["entriesTable"], $_SESSION["accountsTable"],
-					$_SESSION["accountsTable"], $_SESSION["entriesTable"], 
+					$_SESSION["accountsTable"], $subscriptionFeeCategory, $_SESSION["entriesTable"],
 					$startDate, $_SESSION["entriesTable"], $endDate);
 	
 	$p2Subs2a = getDataFromTable($p2SQL2a, $cdb);
@@ -106,13 +114,13 @@
 	// Get subscription fees
 	$p3SQL2a = sprintf("SELECT %s.*,
 		COALESCE(SUM(COALESCE(%s.debit,0) - COALESCE(%s.credit,0)),0) AS feetotal
-		FROM %s 
+		FROM %s
 		LEFT JOIN %s ON %s.transaction = %s.id
 		LEFT JOIN %s ON %s.account = %s.id
-		WHERE %s.id = 493 AND %s.date >= '%s' AND %s.date <= '%s'", 
+		WHERE %s.category = '%s' AND %s.date >= '%s' AND %s.date <= '%s'",
 					$_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"],
 					$_SESSION["accountsTable"], $_SESSION["entriesTable"], $_SESSION["accountsTable"],
-					$_SESSION["accountsTable"], $_SESSION["entriesTable"], 
+					$_SESSION["accountsTable"], $subscriptionFeeCategory, $_SESSION["entriesTable"],
 					$startDate, $_SESSION["entriesTable"], $endDate);
 	
 	$p3Subs2a = getDataFromTable($p3SQL2a, $cdb);
@@ -145,13 +153,13 @@
 	// Get subscription fees
 	$p4SQL2a = sprintf("SELECT %s.*,
 		COALESCE(SUM(COALESCE(%s.debit,0) - COALESCE(%s.credit,0)),0) AS feetotal
-		FROM %s 
+		FROM %s
 		LEFT JOIN %s ON %s.transaction = %s.id
 		LEFT JOIN %s ON %s.account = %s.id
-		WHERE %s.id = 493 AND %s.date >= '%s' AND %s.date <= '%s'", 
+		WHERE %s.category = '%s' AND %s.date >= '%s' AND %s.date <= '%s'",
 					$_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"],
 					$_SESSION["accountsTable"], $_SESSION["entriesTable"], $_SESSION["accountsTable"],
-					$_SESSION["accountsTable"], $_SESSION["entriesTable"], 
+					$_SESSION["accountsTable"], $subscriptionFeeCategory, $_SESSION["entriesTable"],
 					$startDate, $_SESSION["entriesTable"], $endDate);
 	
 	$p4Subs2a = getDataFromTable($p4SQL2a, $cdb);
@@ -183,13 +191,13 @@
 	// Get subscription fees
 	$p5SQL2a = sprintf("SELECT %s.*,
 		COALESCE(SUM(COALESCE(%s.debit,0) - COALESCE(%s.credit,0)),0) AS feetotal
-		FROM %s 
+		FROM %s
 		LEFT JOIN %s ON %s.transaction = %s.id
 		LEFT JOIN %s ON %s.account = %s.id
-		WHERE %s.id = 493 AND %s.date >= '%s' AND %s.date <= '%s'", 
+		WHERE %s.category = '%s' AND %s.date >= '%s' AND %s.date <= '%s'",
 					$_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"],
 					$_SESSION["accountsTable"], $_SESSION["entriesTable"], $_SESSION["accountsTable"],
-					$_SESSION["accountsTable"], $_SESSION["entriesTable"], 
+					$_SESSION["accountsTable"], $subscriptionFeeCategory, $_SESSION["entriesTable"],
 					$startDate, $_SESSION["entriesTable"], $endDate);
 	
 	$p5Subs2a = getDataFromTable($p5SQL2a, $cdb);
@@ -220,13 +228,13 @@
 	// Get subscription fees
 	$p6SQL2a = sprintf("SELECT %s.*,
 		COALESCE(SUM(COALESCE(%s.debit,0) - COALESCE(%s.credit,0)),0) AS feetotal
-		FROM %s 
+		FROM %s
 		LEFT JOIN %s ON %s.transaction = %s.id
 		LEFT JOIN %s ON %s.account = %s.id
-		WHERE %s.id = 493 AND %s.date >= '%s' AND %s.date <= '%s'", 
+		WHERE %s.category = '%s' AND %s.date >= '%s' AND %s.date <= '%s'",
 					$_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"], $_SESSION["entriesTable"], $_SESSION["transactionsTable"],
 					$_SESSION["accountsTable"], $_SESSION["entriesTable"], $_SESSION["accountsTable"],
-					$_SESSION["accountsTable"], $_SESSION["entriesTable"], 
+					$_SESSION["accountsTable"], $subscriptionFeeCategory, $_SESSION["entriesTable"],
 					$startDate, $_SESSION["entriesTable"], $endDate);
 	
 	$p6Subs2a = getDataFromTable($p6SQL2a, $cdb);
