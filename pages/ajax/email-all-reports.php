@@ -1,7 +1,7 @@
 <?php
 
-	include("includes/framework/login-check.php");
-	$cdb = get_cdb();	
+	include("includes/framework/require-login.php");
+	$cdb = get_cdb();
 
 	// Get form data
 	$startDate = $cdb->real_escape_string($_POST["startdate"]);

@@ -1,6 +1,6 @@
 <?php
 
-	include("includes/framework/login-check.php");
+	include("includes/framework/require-login.php");
 	$cdb = get_cdb();
 
 	// Set up PHPMailer
@@ -20,8 +20,8 @@
 	$mail->Host = "smtp.gmail.com";
 	$mail->Port = "465";
 	$mail->isHTML();
-	$mail->Username = "fidiminteractive@gmail.com";
-	$mail->Password = "FIDIMn@t2!";
+	$mail->Username = MAILER_USERNAME;
+	$mail->Password = MAILER_PASSWORD; /* See includes/framework/config.php -- must be a Gmail App Password */
 	$mail->SetFrom("support@fidim.com", "FIDIM Interactive, LLC");
 	$mail->addReplyTo("support@fidim.com", "FIDIM Interactive, LLC");
 	
